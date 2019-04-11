@@ -7,4 +7,5 @@
     <string name="Message">Message</string>
     <string name="ok">OK</string>
     <string name="title_activity_material">MaterialActivity</string>
+    <string name="restart">Restart?</string>
 </resources>

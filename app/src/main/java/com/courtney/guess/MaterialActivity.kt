@@ -5,7 +5,6 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_material.*
 import kotlinx.android.synthetic.main.content_material.*
 
@@ -20,8 +19,17 @@ class MaterialActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                .setAction("Action", null).show()
+            AlertDialog.Builder(this)
+                .setMessage(getString(R.string.Message))
+                .setMessage(getString(R.string.restart))
+                .setPositiveButton(getString(R.string.ok)) { dialog, which ->
+                    secretNumber.restart()
+                    counter.setText(secretNumber.count.toString())
+                    ed_number.setText("")
+                }
+                .setNeutralButton("Cancel", null)
+                .show()
+            counter.setText(secretNumber.count.toString())
         }
 
         Log.d(TAG, "secret: ${secretNumber.secret}")
@@ -39,6 +47,7 @@ class MaterialActivity : AppCompatActivity() {
             diff < 0 -> message = getString(R.string.Higher)
             diff > 0 -> message = getString(R.string.Lower)
         }
+        counter.setText(secretNumber.count.toString())
 //        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
         AlertDialog.Builder(this)
             .setTitle(getString(R.string.Message))
