@@ -6,6 +6,8 @@
     <string name="Lower">Lower</string>
     <string name="Message">Message</string>
     <string name="ok">OK</string>
-    <string name="title_activity_material">MaterialActivity</string>
+    <string name="title_activity_material" translatable="false">MaterialActivity</string>
     <string name="restart">Restart?</string>
+    <string name="excellent">Excellent! The number is</string>
+    <string name="cancel">Cancel</string>
 </resources>
