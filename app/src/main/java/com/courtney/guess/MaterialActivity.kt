@@ -30,8 +30,9 @@ class MaterialActivity : AppCompatActivity() {
                 }
                 .setNeutralButton(getString(R.string.cancel), null)
                 .show()
-            counter.setText(secretNumber.count.toString())
         }
+
+        counter.setText(secretNumber.count.toString())
 
         Log.d(TAG, "secret: ${secretNumber.secret}")
     }
@@ -42,14 +43,14 @@ class MaterialActivity : AppCompatActivity() {
         Log.d(TAG, "number: $n")
 
         val diff = secretNumber.validate(n)
-        var message = getString(R.string.bingo)
 
-        when {
-            diff < 0 -> message = getString(R.string.Higher)
-            diff > 0 -> message = getString(R.string.Lower)
-            diff == 0 && secretNumber.count < 3
-            -> message = "${getString(R.string.excellent)} ${secretNumber.secret}"
+        var message = when {
+            diff < 0 -> getString(R.string.Higher)
+            diff > 0 -> getString(R.string.Lower)
+            diff == 0 && secretNumber.count < 3 -> "${getString(R.string.excellent)} ${secretNumber.secret}"
+            else ->  getString(R.string.bingo)
         }
+
         counter.setText(secretNumber.count.toString())
 //        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
         AlertDialog.Builder(this)
