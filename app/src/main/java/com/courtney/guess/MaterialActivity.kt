@@ -1,5 +1,7 @@
 package com.courtney.guess
 
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -33,8 +35,13 @@ class MaterialActivity : AppCompatActivity() {
         }
 
         counter.setText(secretNumber.count.toString())
-
         Log.d(TAG, "secret: ${secretNumber.secret}")
+
+        val count = getSharedPreferences("guess", Context.MODE_PRIVATE)
+            .getInt("REC_COUNTER", -1)
+        val nick = getSharedPreferences("guess", Context.MODE_PRIVATE)
+            .getString("REC_NICKNAME", null)
+        Log.d(TAG, "${count} ${nick}")
     }
 
     fun check(view : View) {
@@ -56,7 +63,13 @@ class MaterialActivity : AppCompatActivity() {
         AlertDialog.Builder(this)
             .setTitle(getString(R.string.Message))
             .setMessage(message)
-            .setPositiveButton(getString(R.string.ok), null)
+            .setPositiveButton(getString(R.string.ok), {dialog, which ->
+                if (diff == 0) {
+                    val intent = Intent(this, RecordActivity::class.java)
+                    intent.putExtra("COUNTER", secretNumber.count)
+                    startActivity(intent)
+                }
+            })
             .show()
 
     }
