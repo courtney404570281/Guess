@@ -36,4 +36,12 @@ class MaterialActivityTester{
         }
     }
 
+    @Test
+    fun restart() {
+
+        onView(withId(R.id.fab)).perform(click())
+        onView(withText(R.string.ok)).perform(click())
+        onView(withId(R.id.counter)).check(matches(withText("0")))
+
+    }
 }
